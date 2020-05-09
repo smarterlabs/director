@@ -1,4 +1,4 @@
-const { move, copy } = require(`fs-extra`)
+const { copy } = require(`fs-extra`)
 const { join } = require(`path`)
 const getPaths = require(`./get-paths`)
 
@@ -11,12 +11,7 @@ module.exports = async function build(options){
 	paths.forEach(path => {
 		let src = join(cwd, options.src, path.src)
 		let dist = join(cwd, options.dist, path.url || path.dist)
-		if (options.move) {
-			promises.push(move(src, dist, { overwrite: true }))
-		}
-		else{
-			promises.push(copy(src, dist, { overwrite: true }))
-		}
+		promises.push(copy(src, dist, { overwrite: true }))
 	})
 	await Promise.all(promises)
 	console.log(`Done assembling`)
