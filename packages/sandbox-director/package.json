@@ -1,0 +1,12 @@
+{
+  "name": "@app/sandbox-director",
+  "version": "0.0.0",
+  "scripts": {
+    "build": "node director build",
+    "clean": "node director clean",
+    "dev": "node director develop"
+  },
+  "dependencies": {
+    "@smarterlabs/director": "*"
+  }
+}

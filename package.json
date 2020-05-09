@@ -1,0 +1,37 @@
+{
+  "name": "director",
+  "private": true,
+  "author": "https://smarterlabs.com",
+  "version": "0.0.0",
+  "license": "MIT",
+  "scripts": {
+    "bootstrap": "yarn run clean && cd packages/data && yarn build",
+    "build": "cd packages/sandbox-director && yarn build",
+    "clean": "npx lerna run clean --stream --no-sort --concurrency 999",
+    "dev": "npx lerna run dev --stream --no-sort --concurrency 999",
+    "lint": "npx eslint ./",
+    "lint:fix": "npx eslint ./ --fix",
+    "stop": "sudo killall -9 node"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "**/*.js": [
+      "eslint --fix"
+    ]
+  },
+  "devDependencies": {
+    "@smarterlabs/eslint-config": "^1.0.9",
+    "eslint": "^6.8.0",
+    "husky": "^4.2.5",
+    "lerna": "^3.20.2",
+    "lint-staged": "^10.2.2",
+    "open-cli": "^6.0.1"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "name": "@app/sandbox-a",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "serve www -l 5000"
+  },
+  "dependencies": {
+    "serve": "^11.3.0"
+  }
+}
