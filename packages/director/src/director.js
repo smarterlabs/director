@@ -28,6 +28,8 @@ module.exports = function Director(options){
 }
 
 const defaultOptions = {
+	src: `/`,
+	dist: `dist`,
 	sort: (a, b) => {
 		if(a.url == `/`) return 1
 		if(b.url == `/`) return -1
