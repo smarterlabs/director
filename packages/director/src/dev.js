@@ -1,6 +1,7 @@
 const express = require(`express`)
 const { createProxyMiddleware } = require(`http-proxy-middleware`)
 const open = require(`open`)
+const { join } = require(`path`)
 
 const app = express()
 const proxy = createProxyMiddleware
@@ -17,15 +18,21 @@ module.exports = function startServer(options){
 	let paths = getPaths(options)
 
 	paths.forEach(path => {
-		app.use(path.url, proxy({
-			target: `http://localhost:${path.port}`,
-			changeOrigin: true,
-			pathRewrite: {
-				[path.url]: ``,
-			},
-			...options.proxyOptions,
-			...path.proxyOptions,
-		}))
+		if (path.port) {
+			app.use(path.url, proxy({
+				target: `http://localhost:${path.port}`,
+				changeOrigin: true,
+				pathRewrite: {
+					[path.url]: ``,
+				},
+				...options.proxyOptions,
+				...path.proxyOptions,
+			}))
+		}
+		else{
+			let staticDir = join(process.cwd(), options.src, path.src)
+			app.use(path.url, express.static(staticDir))
+		}
 	})
 
 	app.listen(options.port)

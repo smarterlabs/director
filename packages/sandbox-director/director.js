@@ -6,6 +6,9 @@ Director({
 			port: 5000,
 			src: `sandbox-a/www`,
 		},
+		'/assets': {
+			src: `sandbox-b/www`,
+		},
 	},
 	src: `../`,
 	dist: `dist`,
