@@ -11,7 +11,9 @@
     "dev": "npx lerna run dev --stream --no-sort --concurrency 999",
     "lint": "npx eslint ./",
     "lint:fix": "npx eslint ./ --fix",
-    "stop": "sudo killall -9 node"
+    "publish": "lerna publish from-package --yes",
+    "stop": "sudo killall -9 node",
+    "version": "lerna version"
   },
   "workspaces": [
     "packages/*"
