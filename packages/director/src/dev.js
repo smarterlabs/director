@@ -2,6 +2,7 @@ const express = require(`express`)
 const { createProxyMiddleware } = require(`http-proxy-middleware`)
 const open = require(`open`)
 const { join } = require(`path`)
+const getPaths = require(`./get-paths`)
 
 const app = express()
 const proxy = createProxyMiddleware
@@ -42,25 +43,3 @@ module.exports = function startServer(options){
 	}
 }
 
-// Build an array of objects containing path information
-function getPaths(options) {
-	let paths = []
-
-	if (Array.isArray(options.paths)) {
-		paths.push(...options.paths)
-	}
-	else {
-		let keys = Object.keys(options.paths)
-		keys.forEach(url => {
-			paths.push({
-				url,
-				...options.paths[url],
-			})
-		})
-	}
-	if (options.sort) {
-		paths.sort(options.sort)
-	}
-
-	return paths
-}
