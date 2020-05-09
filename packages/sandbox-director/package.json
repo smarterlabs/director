@@ -1,6 +1,7 @@
 {
   "name": "@app/sandbox-director",
   "version": "0.0.0",
+  "private": true,
   "scripts": {
     "build": "node director build",
     "clean": "node director clean",
