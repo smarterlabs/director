@@ -13,6 +13,12 @@ module.exports = async function build(options){
 		let dist = join(cwd, options.dist, path.url || path.dist)
 		promises.push(ncp(src, dist))
 	})
-	await Promise.all(promises)
+	const errs = await Promise.all(promises)
+	errs.forEach(err => {
+		if(err){
+			console.error(err)
+			process.exit(1)
+		}
+	})
 	console.log(`Done assembling`)
 }
