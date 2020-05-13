@@ -1,6 +1,6 @@
 {
   "name": "@app/sandbox-director",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": true,
   "scripts": {
     "build": "node director build",
@@ -8,6 +8,6 @@
     "dev": "node director develop"
   },
   "dependencies": {
-    "@smarterlabs/director": "^0.2.1"
+    "@smarterlabs/director": "^0.2.2"
   }
 }
