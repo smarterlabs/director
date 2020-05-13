@@ -2,6 +2,7 @@ const express = require(`express`)
 const { createProxyMiddleware } = require(`http-proxy-middleware`)
 const open = require(`open`)
 const { join } = require(`path`)
+const getStatusCode = require(`url-status-code`)
 const getPaths = require(`./get-paths`)
 
 const app = express()
@@ -39,7 +40,23 @@ module.exports = function startServer(options){
 	app.listen(options.port)
 	console.log(`Director started at ${options.port}`)
 	if(options.open){
-		open(`http://localhost:${options.port}/`)
+		let url = `http://localhost:${options.port}/`
+		openUrl(url)
 	}
 }
 
+async function openUrl(url){
+	console.log(`Checking dev URL status...`)
+	const statusCode = await getStatusCode(url)
+	if(statusCode === 200){
+		return open(url)
+	}
+	await waitFor(3000)
+	openUrl(url)
+}
+
+function waitFor(n){
+	return new Promise(resolve => {
+		setTimeout(resolve, n)
+	})
+}

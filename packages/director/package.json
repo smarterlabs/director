@@ -8,6 +8,7 @@
     "fs-extra": "^9.0.0",
     "http-proxy-middleware": "^1.0.3",
     "open": "^7.0.3",
+    "url-status-code": "^2.0.0",
     "yargs": "^15.3.1"
   }
 }
