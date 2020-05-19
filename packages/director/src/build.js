@@ -9,6 +9,7 @@ module.exports = async function build(options){
 	let paths = getPaths(options)
 	for (let i = paths.length; i--;) {
 		let path = paths[i]
+		if (!path.src) continue
 		let src = join(cwd, options.src, path.src)
 		let dist = join(cwd, options.dist, path.url || path.dist)
 		let err = await ncp(src, dist)

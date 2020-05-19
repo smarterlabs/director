@@ -21,15 +21,24 @@ module.exports = function startServer(options){
 
 	paths.forEach(path => {
 		if (path.port) {
-			app.use(path.url, proxy({
-				target: `http://localhost:${path.port}`,
-				changeOrigin: true,
-				pathRewrite: {
-					[path.url]: ``,
-				},
-				...options.proxyOptions,
-				...path.proxyOptions,
-			}))
+			// Proxy
+			if (!path.redirect) {
+				app.use(path.url, proxy({
+					target: `http://localhost:${path.port}`,
+					changeOrigin: true,
+					pathRewrite: {
+						[path.url]: ``,
+					},
+					...options.proxyOptions,
+					...path.proxyOptions,
+				}))
+			}
+			// Redirect
+			else{
+				app.get(path.url, function (req, res) {
+					res.redirect(`http://localhost:${path.port}`)
+				})
+			}
 		}
 		else{
 			let staticDir = join(process.cwd(), options.src, path.src)

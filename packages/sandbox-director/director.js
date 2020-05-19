@@ -9,6 +9,10 @@ Director({
 		'/assets': {
 			src: `sandbox-b/www`,
 		},
+		'/google': {
+			port: 3333,
+			redirect: true,
+		},
 	},
 	src: `../`,
 	dist: `dist`,
