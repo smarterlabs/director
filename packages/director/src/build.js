@@ -17,6 +17,15 @@ module.exports = async function build(options){
 			console.error(err)
 			process.exit(1)
 		}
+		if (options.waitBetweenBuilds){
+			await waitFor(options.waitBetweenBuilds)
+		}
 	}
 	console.log(`Done assembling`)
+}
+
+function waitFor(n){
+	return new Promise((resolve) => {
+		setTimeout(resolve, n)
+	})
 }
